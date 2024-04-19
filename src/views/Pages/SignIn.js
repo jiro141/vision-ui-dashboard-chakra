@@ -26,7 +26,7 @@ import GradientBorder from "components/GradientBorder/GradientBorder";
 function SignIn() {
   const titleColor = "white";
   const textColor = "gray.400";
-
+  
   return (
     <Flex position='relative'>
       <Flex
