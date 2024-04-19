@@ -1,23 +1,5 @@
-/*!
-
-=========================================================
-* Vision UI Free Chakra - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-chakra
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-chakra/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import React from "react";
-
+import { useEffect, useState } from "react";
 // Chakra imports
 import {
   Flex,
@@ -34,7 +16,8 @@ import {
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
+//data endpoint
+import { Clientes } from "api/controllers/Clients";
 // Table Components
 import TablesProjectRow from "components/Tables/TablesProjectRow";
 import TablesTableRow from "components/Tables/TablesTableRow";
@@ -46,132 +29,87 @@ import { tablesProjectData, tablesTableData } from "variables/general";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 function Tables() {
+  const [clientes, setClientes] = useState();
+  const clients = async () => {
+    const salveClients = await Clientes();
+    setClientes(salveClients);
+  };
+  useEffect(() => {
+    clients();
+  }, []);
+  console.log(clientes);
   return (
-    <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
+    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
       {/* Authors Table */}
-      <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
-        <CardHeader p='6px 0px 22px 0px'>
-          <Text fontSize='lg' color='#fff' fontWeight='bold'>
-            Authors Table
+      <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
+        <CardHeader p="6px 0px 22px 0px">
+          <Text fontSize="lg" color="#fff" fontWeight="bold">
+            Clientes
           </Text>
         </CardHeader>
         <CardBody>
-          <Table variant='simple' color='#fff'>
+          <Table variant="simple" color="#fff">
             <Thead>
-              <Tr my='.8rem' ps='0px' color='gray.400'>
+              <Tr my=".8rem" ps="0px" color="gray.400">
                 <Th
-                  ps='0px'
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Author
+                  ps="0px"
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
+                  Nombre
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Function
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
+                  Inscripción
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Status
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
+                  Vencimiento
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Employed
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
+                  Asistencia
                 </Th>
-                <Th borderBottomColor='#56577A'></Th>
+                <Th borderBottomColor="#56577A"></Th>
               </Tr>
             </Thead>
             <Tbody>
-              {tablesTableData.map((row, index, arr) => {
+              {clientes?.map((row, index, arr) => {
+                const fecha = new Date(row?.inscripcion); // Convertimos la cadena a un objeto Date
+                const options = {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }; // Definimos el formato de fecha que queremos
+                const fechaFormateada = fecha.toLocaleDateString(
+                  "es-ES",
+                  options
+                );
+                const vence = new Date(row?.vencimiento); // Convertimos la cadena a un objeto Date
+                const opt = {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }; // Definimos el formato de fecha que queremos
+                const VenceFormateada = vence.toLocaleDateString("es-ES", opt);
                 return (
                   <TablesTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    email={row.email}
-                    subdomain={row.subdomain}
-                    domain={row.domain}
-                    status={row.status}
-                    date={row.date}
-                    lastItem={index === arr.length - 1 ? true : false}
-                  />
-                );
-              })}
-            </Tbody>
-          </Table>
-        </CardBody>
-      </Card>
-      {/* Projects Table */}
-      <Card my='22px' overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
-        <CardHeader p='6px 0px 22px 0px'>
-          <Flex direction='column'>
-            <Text fontSize='lg' color='#fff' fontWeight='bold' mb='.5rem'>
-              Projects Table
-            </Text>
-            <Flex align='center'>
-              <Icon
-                as={AiFillCheckCircle}
-                color='green.500'
-                w='15px'
-                h='15px'
-                me='5px'
-              />
-              <Text fontSize='sm' color='gray.400' fontWeight='normal'>
-                <Text fontWeight='bold' as='span' color='gray.400'>
-                  +30%
-                </Text>{" "}
-                this month
-              </Text>
-            </Flex>
-          </Flex>
-        </CardHeader>
-        <CardBody>
-          <Table variant='simple' color='#fff'>
-            <Thead>
-              <Tr my='.8rem' ps='0px'>
-                <Th
-                  ps='0px'
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Companies
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Budget
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Status
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Completion
-                </Th>
-                <Th borderBottomColor='#56577A'></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {tablesProjectData.map((row, index, arr) => {
-                return (
-                  <TablesProjectRow
-                    name={row.name}
-                    logo={row.logo}
-                    status={row.status}
-                    budget={row.budget}
-                    progression={row.progression}
-                    lastItem={index === arr.length - 1 ? true : false}
+                    name={row?.name}
+                    logo={row?.avatar}
+                    date={fechaFormateada}
+                    vence={VenceFormateada}
+                    email={row?.email}
+                    status={row?.membrecia}
                   />
                 );
               })}

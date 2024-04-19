@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Vision UI Free Chakra - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-chakra
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-chakra/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 
 import React from "react";
 // Chakra imports
@@ -66,10 +50,10 @@ function SignIn() {
             direction='column'
             w='100%'
             background='transparent'
-            mt={{ base: "50px", md: "150px", lg: "160px", xl: "245px" }}
+            mt={{ base: "50px", md: "150px", lg: "100px", xl: "100px" }}
             mb={{ base: "60px", lg: "95px" }}>
             <Heading color={titleColor} fontSize='32px' mb='10px'>
-              Nice to see you!
+              Bienvenido!
             </Heading>
             <Text
               mb='36px'
@@ -77,7 +61,7 @@ function SignIn() {
               color={textColor}
               fontWeight='bold'
               fontSize='14px'>
-              Enter your email and password to sign in
+              Inicia sesión con tu usuario y contraseña.
             </Text>
             <FormControl>
               <FormLabel
@@ -85,7 +69,7 @@ function SignIn() {
                 fontSize='sm'
                 fontWeight='normal'
                 color='white'>
-                Email
+                Usuario
               </FormLabel>
               <GradientBorder
                 mb='24px'
@@ -101,7 +85,7 @@ function SignIn() {
                   w={{ base: "100%", md: "346px" }}
                   maxW='100%'
                   h='46px'
-                  placeholder='Your email adress'
+                  placeholder='Usuario'
                 />
               </GradientBorder>
             </FormControl>
@@ -111,7 +95,7 @@ function SignIn() {
                 fontSize='sm'
                 fontWeight='normal'
                 color='white'>
-                Password
+                Contraseña
               </FormLabel>
               <GradientBorder
                 mb='24px'
@@ -127,7 +111,7 @@ function SignIn() {
                   w={{ base: "100%", md: "346px" }}
                   maxW='100%'
                   type='password'
-                  placeholder='Your password'
+                  placeholder='Contraseña'
                 />
               </GradientBorder>
             </FormControl>
@@ -137,26 +121,26 @@ function SignIn() {
               </DarkMode>
               <FormLabel
                 htmlFor='remember-login'
-                mb='0'
+                mb='0'  
                 ms='1'
                 fontWeight='normal'
                 color='white'>
-                Remember me
+                Recuerdame!
               </FormLabel>
             </FormControl>
             <Button
               variant='brand'
-              fontSize='10px'
+              fontSize='18px'
               type='submit'
               w='100%'
               maxW='350px'
               h='45'
               mb='20px'
               mt='20px'>
-              SIGN IN
+              Iniciar sesión
             </Button>
 
-            <Flex
+            {/* <Flex
               flexDirection='column'
               justifyContent='center'
               alignItems='center'
@@ -168,16 +152,9 @@ function SignIn() {
                   Sign Up
                 </Link>
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
-        <Box
-          w={{ base: "335px", md: "450px" }}
-          mx={{ base: "auto", lg: "unset" }}
-          ms={{ base: "auto", lg: "auto" }}
-          mb='80px'>
-          <AuthFooter />
-        </Box>
         <Box
           display={{ base: "none", lg: "block" }}
           overflowX='hidden'

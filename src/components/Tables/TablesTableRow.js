@@ -38,6 +38,7 @@ function TablesTableRow(props) {
     status,
     date,
     lastItem,
+    vence
   } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
@@ -47,69 +48,63 @@ function TablesTableRow(props) {
     <Tr>
       <Td
         minWidth={{ sm: "250px" }}
-        ps='0px'
+        ps="0px"
         border={lastItem ? "none" : null}
-        borderBottomColor='#56577A'>
-        <Flex align='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
+        borderBottomColor="#56577A"
+      >
+        <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           <Avatar
             src={logo}
-            w='50px'
-            borderRadius='12px'
-            me='18px'
-            border='none'
+            w="50px"
+            borderRadius="12px"
+            me="18px"
+            border="none"
           />
-          <Flex direction='column'>
+          <Flex direction="column">
             <Text
-              fontSize='sm'
-              color='#fff'
-              fontWeight='normal'
-              minWidth='100%'>
+              fontSize="sm"
+              color="#fff"
+              fontWeight="normal"
+              minWidth="100%"
+            >
               {name}
             </Text>
-            <Text fontSize='sm' color='gray.400' fontWeight='normal'>
+            <Text fontSize="sm" color="gray.400" fontWeight="normal">
               {email}
             </Text>
           </Flex>
         </Flex>
       </Td>
 
-      <Td
-        border={lastItem ? "none" : null}
-        borderBottomColor='#56577A'
-        minW='150px'>
-        <Flex direction='column'>
-          <Text fontSize='sm' color='#fff' fontWeight='normal'>
-            {domain}
-          </Text>
-          <Text fontSize='sm' color='gray.400' fontWeight='normal'>
-            {subdomain}
-          </Text>
-        </Flex>
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
+        {date}
       </Td>
-      <Td border={lastItem ? "none" : null} borderBottomColor='#56577A'>
-        <Badge
-          bg={status === "Online" ? "green.400" : "transparent"}
-          color={status === "Online" ? "white" : colorStatus}
-          fontSize='sm'
-          p='3px 10px'
-          borderRadius='8px'
-          border={status === "Online" ? "none" : "1px solid #fff"}
-          fontWeight='normal'>
-          {status}
-        </Badge>
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
+        {vence}
       </Td>
-      <Td border={lastItem ? "none" : null} borderBottomColor='#56577A'>
-        <Text fontSize='sm' color='#fff' fontWeight='normal'>
-          {date}
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
+        <Text fontSize="sm" color="#fff" fontWeight="normal">
+          <Badge
+            bg={status === true ? "green.400" : "transparent"}
+            color={status === true ? "white" : colorStatus}
+            fontSize="sm"
+            p="3px 10px"
+            borderRadius="8px"
+            border={status === true ? "none" : "1px solid #fff"}
+            fontWeight="normal"
+          >
+            {status === true ? "Asistente" : "Falto"}
+          </Badge>
         </Text>
       </Td>
-      <Td border={lastItem ? "none" : null} borderBottomColor='#56577A'>
-        <Button p='0px' bg='transparent' variant='no-hover'>
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
+        <Button p="0px" bg="transparent" variant="no-hover">
           <Text
-            fontSize='sm'
-            color='gray.400'
-            fontWeight='bold'
-            cursor='pointer'>
+            fontSize="sm"
+            color="gray.400"
+            fontWeight="bold"
+            cursor="pointer"
+          >
             Edit
           </Text>
         </Button>
