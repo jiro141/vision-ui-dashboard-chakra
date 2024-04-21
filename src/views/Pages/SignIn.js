@@ -1,6 +1,6 @@
-
-
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 // Chakra imports
 import {
   Box,
@@ -26,7 +26,34 @@ import GradientBorder from "components/GradientBorder/GradientBorder";
 function SignIn() {
   const titleColor = "white";
   const textColor = "gray.400";
-  
+  const history = useHistory();
+
+  // State for form inputs
+  const [username, setUsername] = useState("");
+  const [user_password, setPassword] = useState("");
+
+  // Function to handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Make a request to the backend
+      const response = await axios.post(`${'http://127.0.0.1:8000'}/login`, {
+        username,
+        user_password,
+      });
+
+      // Store the authentication token
+      localStorage.setItem("authToken", response.data.token);
+
+      // Redirect to the dashboard
+      history.push("/admin/dashboard");
+    } catch (error) {
+      console.error("Error during login", error);
+      // Handle error...
+    }
+  };
+
   return (
     <Flex position='relative'>
       <Flex
@@ -86,6 +113,8 @@ function SignIn() {
                   maxW='100%'
                   h='46px'
                   placeholder='Usuario'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </GradientBorder>
             </FormControl>
@@ -112,21 +141,10 @@ function SignIn() {
                   maxW='100%'
                   type='password'
                   placeholder='Contraseña'
+                  value={user_password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </GradientBorder>
-            </FormControl>
-            <FormControl display='flex' alignItems='center'>
-              <DarkMode>
-                <Switch id='remember-login' colorScheme='brand' me='10px' />
-              </DarkMode>
-              <FormLabel
-                htmlFor='remember-login'
-                mb='0'  
-                ms='1'
-                fontWeight='normal'
-                color='white'>
-                Recuerdame!
-              </FormLabel>
             </FormControl>
             <Button
               variant='brand'
@@ -136,23 +154,11 @@ function SignIn() {
               maxW='350px'
               h='45'
               mb='20px'
-              mt='20px'>
+              mt='20px'
+              onClick={handleSubmit}>
               Iniciar sesión
             </Button>
-
-            {/* <Flex
-              flexDirection='column'
-              justifyContent='center'
-              alignItems='center'
-              maxW='100%'
-              mt='0px'>
-              <Text color={textColor} fontWeight='medium'>
-                Don't have an account?
-                <Link color={titleColor} as='span' ms='5px' fontWeight='bold'>
-                  Sign Up
-                </Link>
-              </Text>
-            </Flex> */}
+            {/* ...rest of the component... */}
           </Flex>
         </Flex>
         <Box
